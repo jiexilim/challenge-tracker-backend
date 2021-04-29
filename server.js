@@ -1,19 +1,26 @@
 const express = require("express");
-const app = express();
+const cors = require('cors');
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const User = require("./models/user");
+
 require("dotenv/config");
 
+const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(cors());
+app.use(express.json());
+
 mongoose.connect(
-    process.env.ATLAS_URL,
-    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
-    () => console.log("Successfully connected to database!")
+	process.env.ATLAS_URL,
+	{ useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+	() => console.log("Successsfully connected to database!")
 );
 
-const authRouter = require("./routes/auth");
+const usersRouter = require('./routes/users-route');
 
-app.use("/auth", authRouter);
+app.use('/user', usersRouter);
 
 app.get("/", (req, res) => res.send("Working"));
 
