@@ -11,7 +11,7 @@ router.route('/').get((req, res) => {
 router.post("/register", async (req, res) => {
 	const { username, password: plainTextPassword } = req.body;
 
-    if (!username || typeof username !== 'string') {
+    if (!username) {
         return res.json({ status: 'error', error: "Invalid username" });
     }
     
