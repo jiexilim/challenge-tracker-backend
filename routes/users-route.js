@@ -1,15 +1,20 @@
   
 const router = require('express').Router();
+const controller = require("../controllers/users-controller")
 const User = require('../models/user');
 const bcrypt = require("bcryptjs");
 
+router.route('/register')
+  .post(controller.create)
+
+/**
 router.route('/').get((req, res) => {
-  User.find()
-    .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error: ' + err));
+	User.find()
+		.then(users => res.json(users))
+		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', (req, res) => {
     const username = req.body.username;
     const plainTextPassword = req.body.password;
 
@@ -28,11 +33,11 @@ router.post('/register', async (req, res) => {
 		})
 	}
 
-    const password = await bcrypt.hash(plainTextPassword, 10)
+    const password = bcrypt.hash(plainTextPassword, 10)
 
-    const newUser = new User({username, password});
+    const newUser = User.create({username, password});
 
-    await newUser.save()
+   newUser.save()
     .then(() => res.json({ status: 'ok' }))
     .catch(error => {
         if (error.code === 11000) {
@@ -43,5 +48,5 @@ router.post('/register', async (req, res) => {
     });
 });
 
-
+*/
 module.exports = router;
