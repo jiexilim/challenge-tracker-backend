@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose')
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -11,23 +12,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}))
 
-const client = new MongoClient(process.env.ATLAS_URL, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
-
-async function run() {
-    try {
-        await client.connect();
-        console.log("Connected correctly to server");
-    } catch (err) {
-        console.log(err.stack);
-    }
-    finally {
-        await client.close();
-    }
+const connectionParams={
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true 
 }
-run().catch(console.dir);
+mongoose.connect(process.env.ATLAS_URL,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 
 const usersRouter = require('./routes/users-route');
 
