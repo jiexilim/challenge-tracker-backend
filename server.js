@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require('cors');
-const { MongoClient } = require("mongodb");
 const mongoose = require('mongoose')
 
 const app = express();
@@ -26,8 +25,11 @@ mongoose.connect(process.env.ATLAS_URL,connectionParams)
     })
 
 const usersRouter = require('./routes/users-route');
+const goalsRouter = require('./routes/goals-route');
+
 
 app.get("/", (req, res) => res.send("Working"));
 app.use('/user', usersRouter);
+app.use('/goal', goalsRouter);
 
 app.listen(port, () => console.log(`Server is running on port: ${port}`));
