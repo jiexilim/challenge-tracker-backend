@@ -23,4 +23,11 @@ router.post('/create', async (req, res) => {
 
 });
 
+router.delete('/delete', async (req, res) => {
+    Goal.deleteOne({ _id: req.body.goalId })
+        .then(() => res.json("Goal deleted"))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
 module.exports = router;
