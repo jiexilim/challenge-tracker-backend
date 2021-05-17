@@ -29,5 +29,21 @@ router.delete('/delete', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.post('/edit', async (req, res) => {
+    console.log(req.body)
+    Goal.findOneAndUpdate(
+        { _id: req.body.goalId },
+        {
+            $set: {
+                title: req.body.title,
+                description: req.body.description,
+                benefit: req.body.benefit,
+                endDate: req.body.endDate
+            }
+        }).then(() => res.json("Goal updated"))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+})
+
 
 module.exports = router;
