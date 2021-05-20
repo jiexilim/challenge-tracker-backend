@@ -26,6 +26,9 @@ const goalSchema = new Schema(
 			type: String,
 			required: true
 		}
+		// progress: {
+		// 	type: Number
+		// }
 	},
 	{
 		timestamps: true,

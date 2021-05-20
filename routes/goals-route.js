@@ -30,7 +30,6 @@ router.delete('/delete', async (req, res) => {
 });
 
 router.post('/edit', async (req, res) => {
-    console.log(req.body)
     Goal.findOneAndUpdate(
         { _id: req.body.goalId },
         {

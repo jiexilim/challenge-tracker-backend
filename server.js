@@ -26,10 +26,11 @@ mongoose.connect(process.env.ATLAS_URL,connectionParams)
 
 const usersRouter = require('./routes/users-route');
 const goalsRouter = require('./routes/goals-route');
-
+const targetsRouter = require('./routes/targets-route');
 
 app.get("/", (req, res) => res.send("Working"));
 app.use('/user', usersRouter);
 app.use('/goal', goalsRouter);
+app.use('/target', targetsRouter);
 
 app.listen(port, () => console.log(`Server is running on port: ${port}`));
