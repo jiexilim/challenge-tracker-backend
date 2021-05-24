@@ -9,21 +9,30 @@ const actionSchema = new Schema(
 			required: true,
 			trim: true,
 		},
-        dueDate: {
-            type: Date,
-            default: Date.now,
-            min: Date.now,
-        },
-		description: {
-			type: String,
-		},
-        toAchieve: {
+		date: {
             type: String,
+            // default: Date.now,
+            // min: Date.now,
+        },
+		targetId: {
+			type: String,
+			required: true
+		},
+		index: {
+			type: Number,
+			required: true
+		},
+        isCompleted: {
+            type: Boolean,
+            default: false,
         }
 	},
 	{
 		timestamps: true,
 	},
+	{
+		collection: 'actions'
+	}
 );
 
 const Action = mongoose.model('Action', actionSchema);

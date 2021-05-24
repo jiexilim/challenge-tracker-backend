@@ -22,13 +22,13 @@ const goalSchema = new Schema(
             default: Date.now,
             min: Date.now,
         },
+		tags: {
+			type: Array
+		},
 		userId: {
 			type: String,
 			required: true
 		}
-		// progress: {
-		// 	type: Number
-		// }
 	},
 	{
 		timestamps: true,

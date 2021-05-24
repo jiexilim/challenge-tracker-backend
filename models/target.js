@@ -10,21 +10,14 @@ const targetSchema = new Schema(
 			trim: true,
 		},
 		endDate: {
-            type: String,
-            // default: Date.now,
-            // min: Date.now,
+            type: Date,
+            default: Date.now,
+            min: Date.now,
         },
 		goalId: {
 			type: String,
 			required: true
 		},
-        // progress: {
-        //     type: Number,
-        // },
-        // totalProgress: {
-        //     type: Number,
-        //     required: true,
-        // },
         isCompleted: {
             type: Boolean,
             default: false,
