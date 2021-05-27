@@ -9,15 +9,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-    const title = req.body.title;
-    const date = req.body.date;
-    const targetId = req.body.targetId;
-    const index = req.body.index;
-    
-	const newAction = new Action({ title, date, targetId, index })
-
-	newAction.save()
-		.then(() => res.json("Action created"))
+	Action.insertMany(req.body)
+		.then(() => res.json("Action(s) created"))
 		.catch(err => res.status(400).json('Error: ' + err));
 
 });

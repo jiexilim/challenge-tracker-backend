@@ -13,6 +13,9 @@ router.post('/create', async (req, res) => {
     const endDate = req.body.endDate;
     const goalId = req.body.goalId;
 
+    console.log(typeof endDate)
+    console.log(endDate)
+
 	const newTarget = new Target({ title, endDate, goalId })
 
 	newTarget.save()

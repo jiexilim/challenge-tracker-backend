@@ -10,16 +10,12 @@ const actionSchema = new Schema(
 			trim: true,
 		},
 		date: {
-            type: String,
-            // default: Date.now,
-            // min: Date.now,
+            type: Date,
+            default: Date.now,
+            //min: Date.now,
         },
 		targetId: {
 			type: String,
-			required: true
-		},
-		index: {
-			type: Number,
 			required: true
 		},
         isCompleted: {
