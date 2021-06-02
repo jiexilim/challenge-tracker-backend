@@ -9,16 +9,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-    const title = req.body.title;
-    const endDate = req.body.endDate;
-    const goalId = req.body.goalId;
-
-    console.log(typeof endDate)
-    console.log(endDate)
-
-	const newTarget = new Target({ title, endDate, goalId })
-
-	newTarget.save()
+    console.log(req.body)
+	Target.insertMany(req.body)
 		.then(() => res.json("Target created"))
 		.catch(err => res.status(400).json('Error: ' + err));
 

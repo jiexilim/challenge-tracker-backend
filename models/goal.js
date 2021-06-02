@@ -9,10 +9,6 @@ const goalSchema = new Schema(
 			required: true,
 			trim: true,
 		},
-		description: {
-			type: String,
-			trim: true,
-		},
 		benefit: {
             type: String,
 			trim: true,

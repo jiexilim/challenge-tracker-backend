@@ -11,16 +11,15 @@ router.get('/', async (req, res) => {
 router.post('/create', async (req, res) => {
     console.log(req.body)
     const title = req.body.title;
-    const description = req.body.description;
     const benefit = req.body.benefit;
     const endDate = req.body.endDate;
     const tags = req.body.tags;
     const userId = req.body.userId;
 
-	const newGoal = new Goal({ title, description, benefit, endDate, tags, userId })
+	const newGoal = new Goal({ title, benefit, endDate, tags, userId })
 
 	newGoal.save()
-		.then(() => res.json("Goal created"))
+		.then((goal) => res.json({ msg:"Goal created", goalId: goal._id }))
 		.catch(err => res.status(400).json('Error: ' + err));
 
 });
