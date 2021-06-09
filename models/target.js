@@ -1,36 +1,60 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
-const targetSchema = new Schema(
+const taskSchema = new Schema(
 	{
-		title: {
+		name: {
 			type: String,
 			required: true,
 			trim: true,
 		},
-		endDate: {
-            type: Date,
-            default: Date.now,
-            min: Date.now,
+		type: {
+			type: String,
+			required: true
+		},
+		notes: {
+			type: String,
+			trim: true,
+		},
+        isCompleted: {
+            type: Boolean,
+            default: false,
         },
 		goalId: {
 			type: String,
 			required: true
 		},
-        isCompleted: {
-            type: Boolean,
-            default: false,
-        }
+
+		// field for single task
+		endDate: {
+            type: Date,
+            default: Date.now,
+        },
+		subtasks: {
+			type: Array
+		},
+
+		//field for recurring task
+		dates: {
+			type: [Date]
+		},
+		numCompleted: {
+			type: Number,
+			default: 0
+		},
+		computeRecurDatesInfo: {
+			type: Map
+		}
 	},
 	{
 		timestamps: true,
 	},
 	{
-		collection: 'targets'
+		collection: 'tasks'
 	}
 );
 
-const Target = mongoose.model('Target', targetSchema);
+const Task = mongoose.model('Task', taskSchema)
 
-module.exports = Target;
+module.exports = Task
