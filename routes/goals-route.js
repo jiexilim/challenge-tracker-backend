@@ -9,11 +9,10 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    console.log(req.params)
     Goal.findById(req.params.id)
-      .then(goal => res.json(goal))
+      .then(goal => res.json({ goal:goal }))
       .catch(err => res.status(400).json('Error: ' + err));
-  })
+})
 
 router.post('/create', async (req, res) => {
     const newGoal = new Goal(req.body)
@@ -25,22 +24,18 @@ router.post('/create', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-    Goal.deleteOne({ _id: req.params.id })
+    Goal.findByIdAndDelete(req.params.id)
         .then(() => res.json("Goal deleted"))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.post('/update/:id', async (req, res) => {
-    Goal.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-            $set: {
-                name: req.body.name,
-                benefit: req.body.benefit,
-                endDate: req.body.endDate,
-                notes: req.body.notes,
-            }
-        }).then(() => res.json("Goal updated"))
+    Goal.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        benefit: req.body.benefit,
+        endDate: req.body.endDate,
+        notes: req.body.notes,
+    }).then(() => res.json("Goal updated"))
         .catch(err => res.status(400).json('Error: ' + err))
 
 })
