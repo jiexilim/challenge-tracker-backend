@@ -10,13 +10,13 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     Goal.findById(req.params.id)
-      .then(goal => res.json({ goal:goal }))
-      .catch(err => res.status(400).json('Error: ' + err));
+        .then(goal => res.json({ goal: goal }))
+        .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.post('/create', async (req, res) => {
     const newGoal = new Goal(req.body)
-    
+
     newGoal.save()
         .then((goal) => res.json({ msg: "Goal created", goalId: goal._id }))
         .catch(err => res.status(400).json('Error: ' + err))
