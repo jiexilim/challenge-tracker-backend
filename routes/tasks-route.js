@@ -23,8 +23,6 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.post('/update/:id', async (req, res) => {
-    console.log(req.body)
-    console.log(req.params.id)
     if (req.body.type === "recurring") {
         Task.findByIdAndUpdate(req.params.id, {
             name: req.body.name,
@@ -33,9 +31,9 @@ router.post('/update/:id', async (req, res) => {
             computeRecurDatesInfo: req.body.computeRecurDatesInfo,
             notes: req.body.notes,
             isCompleted: req.body.isCompleted
-        })
-            .then(() => res.json("Task updated"))
-            .catch(err => res.status(400).json('Error: ' + err));
+        }) 
+        .then(() => res.json("Task updated"))
+        .catch(err => res.status(400).json('Error: ' + err));
     } else if (req.body.type === "single") {
         Task.findByIdAndUpdate(req.params.id, {
             name: req.body.name,
@@ -44,8 +42,8 @@ router.post('/update/:id', async (req, res) => {
             notes: req.body.notes,
             isCompleted: req.body.isCompleted
         })
-            .then(() => res.json("Task updated"))
-            .catch(err => res.status(400).json('Error: ' + err));
+        .then(() => res.json("Task updated"))
+        .catch(err => res.status(400).json('Error: ' + err));
     }
 })
 
