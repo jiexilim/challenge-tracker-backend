@@ -1,4 +1,4 @@
-  
+
 const express = require("express")
 const router = express.Router()
 const User = require('../models/user')
@@ -11,38 +11,38 @@ router.post('/register', async (req, res) => {
 
     const password = await bcrypt.hash(plainTextPassword, 10)
 
-	const newUser = new User({ username, password })
+    const newUser = new User({ username, password })
 
-	newUser.save()
-		.then(() => res.json('User added'))
-		.catch(err => res.status(400).json('Error: ' + err))
+    newUser.save()
+        .then(() => res.json('User added'))
+        .catch(err => res.status(400).json('Error: ' + err))
 
 });
 
 router.post('/login', async (req, res) => {
-	const username = req.body.username
+    const username = req.body.username
     const password = req.body.password
 
     const user = await User.findOne({ username: username })
 
-	if(!user) {
-		return res.json("Invalid credentials" )
-	}
+    if (!user) {
+        return res.json("Invalid credentials")
+    }
 
-    try{
+    try {
         const match = await bcrypt.compare(password, user.password)
         const accessToken = jwt.sign({
-			id: user._id, 
-			username: user.username
-		}
-		, process.env.TOKEN_SECRET)
-        if(match){
-            return res.json({ accessToken: accessToken })
-			
-        } else {
-            return res.json("Invalid credentials" )
+            id: user._id,
+            username: user.username
         }
-    } catch(err) {
+            , process.env.TOKEN_SECRET)
+        if (match) {
+            return res.json({ accessToken: accessToken })
+
+        } else {
+            return res.json("Invalid credentials")
+        }
+    } catch (err) {
         return res.status(400).json('Error: ' + err)
     }
 })

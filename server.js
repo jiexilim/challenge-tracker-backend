@@ -8,20 +8,26 @@ const port = process.env.PORT || 5000
 require('dotenv').config()
 
 app.use(cors())
+app.use(
+    cors({
+        origin: ["http://localhost:5000"],
+        credentials: true
+    })
+)
 app.use(express.json())
-app.use(express.urlencoded({ extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
-const connectionParams={
+const connectionParams = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true
 }
 
-mongoose.connect(process.env.ATLAS_URL,connectionParams)
-    .then( () => {
+mongoose.connect(process.env.ATLAS_URL, connectionParams)
+    .then(() => {
         console.log('Connected to database ')
     })
-    .catch( (err) => {
+    .catch((err) => {
         console.error(`Error connecting to the database. \n${err}`)
     })
 

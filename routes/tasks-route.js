@@ -3,7 +3,7 @@ const router = express.Router()
 const Task = require('../models/task')
 
 router.get('/', async (req, res) => {
-    Task.find({ goalId: req.query.goalId })
+    await Task.find({ goalId: req.query.goalId })
         .then(task => res.json(task))
         .catch(err => res.status(400).json('Error: ' + err))
 })
@@ -23,8 +23,6 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.post('/update/:id', async (req, res) => {
-    console.log(req.body)
-    console.log(req.params.id)
     if (req.body.type === "recurring") {
         Task.findByIdAndUpdate(req.params.id, {
             name: req.body.name,

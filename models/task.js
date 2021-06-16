@@ -17,10 +17,11 @@ const taskSchema = new Schema(
 			type: String,
 			trim: true,
 		},
-        isCompleted: {
-            type: Boolean,
-            default: false,
-        },
+		isCompleted: {
+			type: Boolean,
+			default: false,
+			require: true,
+		},
 		goalId: {
 			type: String,
 			required: true
@@ -28,9 +29,9 @@ const taskSchema = new Schema(
 
 		// field for single task
 		endDate: {
-            type: Date,
-            default: Date.now,
-        },
+			type: Date,
+			default: Date.now,
+		},
 		subtasks: {
 			type: Array
 		},
