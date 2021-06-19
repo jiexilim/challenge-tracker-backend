@@ -16,7 +16,6 @@ const goalSchema = new Schema(
 		endDate: {
 			type: Date,
 			default: Date.now,
-			min: Date.now,
 		},
 		notes: {
 			type: String,
@@ -26,6 +25,10 @@ const goalSchema = new Schema(
 			type: Array
 		},
 		userId: {
+			type: String,
+			required: true
+		},
+		color: {
 			type: String,
 			required: true
 		}
